@@ -74,7 +74,16 @@ void headout(List *pList)
     p->next->former=pList->head;
     free(p);
 }
-
+// void clean(List *pList)
+// {
+//     Node *p;
+//     Node *q;
+//     for(p=pList->head;p->next;){
+//         q=p;
+//         p=p->next;
+//         free(q);
+//     }
+// }
 void tailout(List *pList)
 {
     Node *p=pList->tail;
@@ -112,5 +121,8 @@ int main(void){
     tailout(&list);
     headprint(&list);
     index(&list,1);
+    printf("Clean");
+    clean(&list);
+    printf("Clean Finshed");
     return 0;
 }
