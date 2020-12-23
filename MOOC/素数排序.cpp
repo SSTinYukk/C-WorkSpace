@@ -2,6 +2,7 @@
 #include<math.h>
 int isprime(int n)
 {
+    
     int i;
     if(n==1)
     return 0;
@@ -17,7 +18,8 @@ int isprime(int n)
 }
 int main()
 {
-    int n=10,is=0,a[100],i;
+    int a[1000000001];
+    int n=10,is=0,i;
     for(i=0;i<n;i++){
         scanf("%d,",&a[i]);
     }
