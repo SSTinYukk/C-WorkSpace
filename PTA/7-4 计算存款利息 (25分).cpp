@@ -5,5 +5,5 @@ int main(){
     double year;
     scanf("%lf %lf %lf",&money,&year,&rate);
     interest=money*pow((1+rate),year)-money;
-    printf("interest = %.2f",interest);
+    printf("interest = %.2f",interest); 
 }
