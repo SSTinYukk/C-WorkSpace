@@ -105,24 +105,3 @@ int index(List *pList,int Index)
     }
     return p->data;
 }
-
-int main(void){
-    int number;
-    List list;
-    list.head=NULL;
-    list.tail=NULL;
-    scanf("%d",&number);
-    while (number!=-1)
-    {
-        tailin(&list,number);
-        scanf("%d",&number);
-    }
-    headout(&list);
-    tailout(&list);
-    headprint(&list);
-    index(&list,1);
-    printf("Clean");
-    clean(&list);
-    printf("Clean Finshed");
-    return 0;
-}
