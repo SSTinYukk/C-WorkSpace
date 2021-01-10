@@ -1,13 +1,17 @@
-#include <stdio.h>
-int main(void)
-{   
-      int  a = 2, b = -1, c = 2;
-
-      if(a < b)
-            if(b < 0)  
-                  c = 0;
-      else  c++;
-      printf("%d\n",c);    
-
-      return 0;
+X,Y
+Z=0
+M,N
+while(X>0){
+      Z++
+      M++
+}
+while(Y>0){
+      Z++
+      N++
+}
+while(M>0){
+      X++
+}
+while(N>0){
+      Y++
 }

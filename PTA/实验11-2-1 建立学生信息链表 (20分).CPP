@@ -26,5 +26,8 @@ int main()
 
 void input()
 {
-
+    struct stud_node *p;
+    
+    scanf("%s%d",&)
+    while()
 }
