@@ -12,7 +12,7 @@ int main()
         }
     }
     int num;
-    for(i=0;i<n;i++){
+    for(i=0;i<=n;i++){
         if(a[i]){
             continue;
         }else{
