@@ -7,6 +7,7 @@ int main()
 	int i=0,j;
 	while (a[i] != 0) {
 		for (j = 0; j<10;j++) {
+			if(a[i]-48==j)
 			b[j]++;
 		}
 		i++;
