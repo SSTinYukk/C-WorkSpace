@@ -74,6 +74,7 @@ void headout(List *pList)
     p->next->former=pList->head;
     free(p);
 }
+<<<<<<< ours
 // void clean(List *pList)
 // {
 //     Node *p;
@@ -84,6 +85,9 @@ void headout(List *pList)
 //         free(q);
 //     }
 // }
+=======
+
+>>>>>>> theirs
 void tailout(List *pList)
 {
     Node *p=pList->tail;
@@ -97,6 +101,7 @@ int index(List *pList,int Index)
     Node *p;
     int dex=0;
     for(p=pList->head;p;p=p->next){
+<<<<<<< ours
         if(Index==dex#include <stdio.h>
 #include <stdlib.h>
  
@@ -148,6 +153,9 @@ void PrintList(LinkList *L)
 	}
 	printf("%d\n",p->data);//因为要求打印最后一个元素后不带空格，所以单独打印 
 }){
+=======
+        if(Index==dex){
+>>>>>>> theirs
             printf("%d\n",p->data);
             break;
         }
@@ -155,8 +163,28 @@ void PrintList(LinkList *L)
     }
     return p->data;
 }
+<<<<<<< ours
 int main()
 {   int number;
     scanf("%d")
     while()
+=======
+
+int main(void){
+    int number;
+    List list;
+    list.head=NULL;
+    list.tail=NULL;
+    scanf("%d",&number);
+    while (number!=-1)
+    {
+        tailin(&list,number);
+        scanf("%d",&number);
+    }
+    headout(&list);
+    tailout(&list);
+    headprint(&list);
+    index(&list,1);
+    return 0;
+>>>>>>> theirs
 }
