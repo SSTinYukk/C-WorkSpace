@@ -11,10 +11,12 @@ union strings
 struct uu
 {
     int a;
+    union strings x;
     int b;
-    union string x;
 };
 
 int main()
 {
+    struct uu a;
+    printf("%p\t%p\t%p\t%p",&a.x.a,&a.x.a[1],&a.x.a[2],&a.x.a[3]);
 }
