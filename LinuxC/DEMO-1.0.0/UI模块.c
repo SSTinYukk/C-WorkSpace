@@ -10,6 +10,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <termios.h>
 
 #include  "Data.h"
 
@@ -57,6 +58,44 @@ void messageManager()
 
 }
 
+int mygetch()
+{
+    struct termios oldt, newt;
+    int ch;
+    tcgetattr(STDIN_FILENO, &oldt);
+    newt = oldt;
+    newt.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+    ch = getchar();
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+    return ch;
+}
+ 
+int getpasswd(char *passwd, int size)
+{
+    int c, n = 0;
+    do
+    {
+        c = mygetch();
+        if (c != '\n' && c != 'r' && c != 127)
+        {
+            passwd[n] = c;
+            printf("*");
+            n++;
+        }
+        else if ((c != '\n' | c != '\r') && c == 127)//判断是否是回车或则退格
+        {
+            if (n > 0)
+            {
+                n--;
+                printf("\b \b");//输出退格
+            }
+        }
+    }while (c != '\n' && c != '\r' && n < (size - 1));
+    passwd[n] = '\0';//消除一个多余的回车
+    return n;
+}
+
 void log_menu(){
 
     printf("\033c");
@@ -72,7 +111,12 @@ void log_menu(){
 
     int key;
     printf("请输入序号:");
-    scanf("%d",&key);
+    char c;
+    while(scanf("%d",&key)!=1)
+    {
+        printf("输入有误,请输入数字序号\n");
+        while((c=getchar())!='\n'&&c!=EOF);
+    };
     switch (key)
     {
     case 0:
@@ -110,6 +154,8 @@ void reg_ui()
     scanf("%s",username);
     cJSON_AddStringToObject(json,"uname",username);
     printf("                     密码(20位以内:");
+    char c;
+    while((c=getchar())!='\n'&&c!=EOF);
     scanf("%s",password);
     cJSON_AddStringToObject(json, "password", password);
     strcpy(sendbuf,cJSON_Print(json));
@@ -149,7 +195,10 @@ void log_ui()
     scanf("%d",&uid);
     cJSON_AddNumberToObject(login,"uid",uid);
     printf("                     密码:");
-    scanf("%s", password);
+    char c;
+    while((c=getchar())!='\n'&&c!=EOF);
+    getpasswd(password,20);
+    printf("\n");
     cJSON_AddStringToObject(login,"password",password);
     strcpy(sendbuf,cJSON_Print(login));
     send(cfd,sendbuf,sizeof(sendbuf),0);
@@ -187,7 +236,12 @@ void user_menu(){
     int key;
 
         printf("请输入序号:");
-        scanf("%d", &key);
+        char c;
+        while(scanf("%d",&key)!=1)
+        {
+            printf("输入有误,请输入数字序号\n");
+            while((c=getchar())!='\n'&&c!=EOF);
+        };
         switch (key)
         {
         case 0:
@@ -545,7 +599,12 @@ void friendlist()
     printf("                        0.   返回上一级 \n");
     int key;
     printf("请输入序号:");
-    scanf("%d", &key);
+    char c;
+    while(scanf("%d",&key)!=1)
+    {
+        printf("输入有误,请输入数字序号\n");
+        while((c=getchar())!='\n'&&c!=EOF);
+    };
     switch (key)
     {
     case 0:
@@ -770,7 +829,12 @@ void pri_msg_menu()
     printf("                        0.   返回上一级 \n");
     int key;
     printf("请输入序号:");
-    scanf("%d", &key);
+    char c;
+    while(scanf("%d",&key)!=1)
+    {
+        printf("输入有误,请输入数字序号\n");
+        while((c=getchar())!='\n'&&c!=EOF);
+    };
     switch (key)
     {
     case 0:
@@ -1066,7 +1130,11 @@ void member_list()
     int key;
     printf("\n            0. 返回上一级\n");
     printf("请输入序号:");
-    scanf("%d", &key);
+    while(scanf("%d",&key)!=1)
+    {
+        printf("输入有误,请输入数字序号\n");
+        while((c=getchar())!='\n'&&c!=EOF);
+    };
     switch (key)    
     {
     case 0:
@@ -1249,7 +1317,12 @@ void group_list()
 
     int key;
     printf("请输入序号:");
-    scanf("%d", &key);
+    char c;
+    while(scanf("%d",&key)!=1)
+    {
+        printf("输入有误,请输入数字序号\n");
+        while((c=getchar())!='\n'&&c!=EOF);
+    };
     switch (key)
     {
     case 0:
@@ -1342,7 +1415,12 @@ void grp_menu()
 
     int key;
     printf("请输入序号:");
-    scanf("%d", &key);
+    char c;
+    while(scanf("%d",&key)!=1)
+    {
+        printf("输入有误,请输入数字序号\n");
+        while((c=getchar())!='\n'&&c!=EOF);
+    };
     switch (key)
     {
     case 0:
