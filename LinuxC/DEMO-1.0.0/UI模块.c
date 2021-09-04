@@ -971,7 +971,7 @@ void apply_add_group()
         recv(cfd, recvbuf, sizeof(recvbuf), 0);
         REC = cJSON_Parse(recvbuf);
         flag = cJSON_GetObjectItem(REC, "flag");
-    } while ((int)flag->valuedouble != CLI_APPLY_ADD_GROUP);
+    } while ((int)flag->valuedouble != SRV_APPLY_ADD_GROUP);
     REC=cJSON_Parse(recvbuf);
     if((int)(cJSON_GetObjectItem(REC,"flag")->valuedouble))
     {
@@ -1124,7 +1124,6 @@ void member_list()
     printf("                                                \n");
     printf("            ID     用户名\n"); 
     for(int i=0;i<ArraySize;i=i+2){
-        while((c=getchar())!='\n'&&c!=EOF);
         printf("          %-6s   %-6s\n",cJSON_GetArrayItem(Array,i)->valuestring,cJSON_GetArrayItem(Array,i+1)->valuestring);
     }
     int key;
